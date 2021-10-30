@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 # Currntly running on Windows so no need for the #! line however I left it for Linux.
+# Added a feature to check the current time so that we don't just request the page 24 hours/day. Take a load off the server and maybe avoid detection a little.
 import requests
 import re
 import os
@@ -8,6 +9,9 @@ import random as rand
 from colorama import Fore, Back, Style, init
 init()
 #
+
+now = ""
+
 print("Inventory Informer bot v0.1b by EZKILLs\n")
 
 # Best Buy requires a user agent. We cannot leave this out or we get access denied.
@@ -29,8 +33,18 @@ urls = [
 url = "https://www.bestbuy.com/site/nvidia-geforce-rtx-3070-ti-8gb-gddr6x-pci-express-4-0-graphics-card-dark-platinum-and-black/6465789.p?skuId=6465789" # Best Buy RTX 3070 Ti link
 url2 = "https://www.bestbuy.com/site/nvidia-geforce-rtx-3070-8gb-gddr6-pci-express-4-0-graphics-card-dark-platinum-and-black/6429442.p?skuId=6429442"    # Best Buy RTX 3070 link
 
+# Check to see if we are between 09:00 and 17:00 (may change to 19:00)
+def checkTime():
+    hour = time.strftime("%H")
+    minute = time.strftime("%M")
+    now = time.strftime("%H:%M:%S")
+    if int(hour) > 9 and int(hour) < 19:
+        print('Time in range')
+        #print(time.strftime('%H'))
+        print('Hour: ' + hour + ' Minute: ' + minute)
+        return True
 
-
+print(now)
 def check(link):
     r = requests.get(link, headers = user_agent)
     if (re.search('Sold Out', r.text)):
@@ -43,9 +57,10 @@ def check(link):
             exit()
 
 while True:
-    for i in range(len(urls)):
-        print("Checking : " + Fore.GREEN + urls[i] + Style.RESET_ALL)
-        check(urls[i])
-        sleepy=rand.randint(1,10)
-        print("Sleeping for [[" + Fore.BLUE + str(sleepy) + Style.RESET_ALL +"]] secdonds")
-        time.sleep(sleepy)
+    if checkTime():
+        for i in range(len(urls)):
+            print("Checking : " + Fore.GREEN + urls[i] + Style.RESET_ALL)
+            check(urls[i])
+            sleepy=rand.randint(1,10)
+            print("Sleeping for [[" + Fore.BLUE + str(sleepy) + Style.RESET_ALL +"]] secdonds")
+            time.sleep(sleepy)
