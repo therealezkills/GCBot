@@ -7,7 +7,7 @@ import os
 import time
 import random as rand
 from colorama import Fore, Back, Style, init
-init()
+init() # as far as I know this is only required for Windows.
 #
 
 now = ""
