@@ -53,7 +53,7 @@ def check(link):
         print(Fore.RED + "[!] Out of stock :( -------------------------" + Style.RESET_ALL)
     else:
         print(Fore.GREEN + "[+]IN STOCK!!!!! :D Opening browser............." + Style.RESET_ALL)
-        while(os.system("\"c:\Program Files\\Mozilla Firefox\\firefox.exe\" " + url)):
+        while(os.system("\"c:\Program Files\\Mozilla Firefox\\firefox.exe\" " + link)):
             print("Loading")
             time.sleep(rand.randint(250, 1000)/1000)
             exit()
