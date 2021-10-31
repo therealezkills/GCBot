@@ -30,8 +30,6 @@ urls = [
     "https://www.bestbuy.com/site/evga-geforce-rtx-3070-xc3-ultra-gaming-8gb-gddr6-pci-express-4-0-graphics-card-light-hash-rate/6479528.p?skuId=6479528",
     "https://www.bestbuy.com/site/gigabyte-nvidia-geforce-rtx-3070ti-eagle-8gb-gddr6x-pci-express-4-0-graphics-card-black/6467782.p?skuId=6467782"
     ]
-#url = "https://www.bestbuy.com/site/nvidia-geforce-rtx-3070-ti-8gb-gddr6x-pci-express-4-0-graphics-card-dark-platinum-and-black/6465789.p?skuId=6465789" # Best Buy RTX 3070 Ti link
-#url2 = "https://www.bestbuy.com/site/nvidia-geforce-rtx-3070-8gb-gddr6-pci-express-4-0-graphics-card-dark-platinum-and-black/6429442.p?skuId=6429442"    # Best Buy RTX 3070 link
 
 # Check to see if we are between 09:00 and 17:00 (may change to 19:00)
 def checkTime():
