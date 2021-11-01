@@ -24,6 +24,9 @@ user_agent = {
 # Here you should enter the URLs you want to include for the bot. The purchase process is manual so you should be quick.
 urls = [
     #Enter URLS separated by commas
+    # Top link is just to test the data-button-state statement below.. and it works! :)
+    #"https://www.bestbuy.com/site/beats-by-dr-dre-powerbeats-pro-totally-wireless-earphones-lava-red/6397383.p?skuId=6397383",
+    "https://www.bestbuy.com/site/gigabyte-nvidia-geforce-rtx-3070-eagle-8gb-gddr6-pci-express-4-0-graphics-card/6437912.p?skuId=6437912",
     "https://www.bestbuy.com/site/nvidia-geforce-rtx-3070-ti-8gb-gddr6x-pci-express-4-0-graphics-card-dark-platinum-and-black/6465789.p?skuId=6465789",
     "https://www.bestbuy.com/site/nvidia-geforce-rtx-3070-8gb-gddr6-pci-express-4-0-graphics-card-dark-platinum-and-black/6429442.p?skuId=6429442",
     "https://www.bestbuy.com/site/evga-geforce-rtx-3070-xc3-ultra-gaming-8gb-gddr6-pci-express-4-0-graphics-card-light-hash-rate/6477077.p?skuId=6477077",
@@ -47,14 +50,14 @@ def checkTime():
 print(now)
 def check(link):
     r = requests.get(link, headers = user_agent)
-    if (re.search('Sold Out', r.text)):
+    # Trying data-button-state="ADD_TO_CART" instead of detecting "Sold Out"
+    if not (re.search('data-button-state="ADD_TO_CART"', r.text)): #(re.search('Sold Out', r.text)) or (re.search('Shop Open-Box', r.text)):
         print(Fore.RED + "[!] Out of stock :( -------------------------" + Style.RESET_ALL)
     else:
         print(Fore.GREEN + "[+]IN STOCK!!!!! :D Opening browser............." + Style.RESET_ALL)
         while(os.system("\"c:\Program Files\\Mozilla Firefox\\firefox.exe\" " + link)):
             print("Loading")
             time.sleep(rand.randint(250, 1000)/1000)
-            exit()
 
 while True:
     if checkTime():
